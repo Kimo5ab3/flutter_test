@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 //main() è la fuzione di entrata di tutta l'app
 void main() {
@@ -30,6 +31,13 @@ class _MyAppState extends State<MyApp> {
     });
     //print(indiceDomanda);
   }
+  
+  //Test di una funzione che diminuisce di 1 _indiceDomanda
+  // void _minusAnswerQuestion() {
+  //   setState(() {
+  //     _indiceDomanda -= 1;
+  //   });
+  // }
 
   //sovrascrittura del metodo build() della classe StatelessWidget passando come parametro un oggetto speciale di Flutter: BuildContext
   @override
@@ -39,7 +47,6 @@ class _MyAppState extends State<MyApp> {
       'Qual è il tuo colore preferito?',
       'Qual è il tuo animale preferito?'
     ];
-
     //build() ritorna un widget
     return MaterialApp(
         home: Scaffold(
@@ -47,19 +54,9 @@ class _MyAppState extends State<MyApp> {
       body: Column(
         children: <Widget>[
           Question(domande[_indiceDomanda]),
-          ElevatedButton(
-            child: Text('Answer1'),
-            //richiamando il nome della funzione senza parentesi sto creando un puntatore alla funzione stessa
-            onPressed: _answerQuestion,
-          ),
-          ElevatedButton(
-            child: Text('Answer2'),
-            onPressed: () => print('Risposta 2 scelta'),
-          ),
-          ElevatedButton(
-            child: Text('Answer3'),
-            onPressed: () => print('Risposta 3 scelta'),
-          )
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
         ],
       ),
     )); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home
