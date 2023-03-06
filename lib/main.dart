@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     });
     //print(indiceDomanda);
   }
-  
+
   //Test di una funzione che diminuisce di 1 _indiceDomanda
   // void _minusAnswerQuestion() {
   //   setState(() {
@@ -44,8 +44,28 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     var domande = [
-      'Qual è il tuo colore preferito?',
-      'Qual è il tuo animale preferito?'
+      //creazione di semplici Mappe chiave-valore per gestire domande e risposte 
+      //oggetti derivati dalla classe Map
+      {
+        'questionText':'Qual è il tuo colore preferito?',
+        'answers':[
+          'Verde','Arancione','Blu','Rosso'
+        ],
+      },
+      {
+        'questionText':'Qual è il tuo animale preferito?',
+        'answers':[
+          'Cane','Gatto','Gorilla','Scimmia'
+        ]
+      },
+      {
+        'questionText':'Qual è il tuo sport preferito?',
+        'answers':[
+          'Trail','Calcio','Powerlifting','Gravel','Kettlebell'
+        ]
+      }
+
+
     ];
     //build() ritorna un widget
     return MaterialApp(
@@ -53,10 +73,10 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(title: Text('Domande')),
       body: Column(
         children: <Widget>[
-          Question(domande[_indiceDomanda]),
-          Answer(_answerQuestion),
-          Answer(_answerQuestion),
-          Answer(_answerQuestion),
+          Question(domande[_indiceDomanda]['questionText']),
+          domande[_indiceDomanda]['answer'].map((domanda){
+            return Answer(domanda);
+          })
         ],
       ),
     )); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home
