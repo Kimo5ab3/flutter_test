@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     var domande = [
-      //creazione di semplici Mappe chiave-valore per gestire domande e risposte 
+      //creazione di semplici Mappe chiave-valore per gestire domande e risposte
       //oggetti derivati dalla classe Map
       {
         'questionText':'Qual è il tuo colore preferito?',
@@ -74,9 +74,9 @@ class _MyAppState extends State<MyApp> {
       body: Column(
         children: <Widget>[
           Question(domande[_indiceDomanda]['questionText']),
-          domande[_indiceDomanda]['answer'].map((domanda){
-            return Answer(domanda);
-          })
+          ...(domande[_indiceDomanda]['answers'] as List<String>).map((domanda){
+            return Answer(_answerQuestion, domanda);
+          }).toList()
         ],
       ),
     )); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home

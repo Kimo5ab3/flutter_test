@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class Answer extends StatelessWidget {
   //voidCallback specifica una funzione che non accetta parametri in entrata e non ritorna niente
   final VoidCallback selectHandler;
-  Answer(this.selectHandler);
+  final String answerText;
+
+  Answer(this.selectHandler, this.answerText);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +16,7 @@ class Answer extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all(Colors.orange.shade600),
               foregroundColor: MaterialStateProperty.all(Colors.white),
             ),
-            child: Text('Answer1'),
+            child: Text(answerText),
             onPressed: selectHandler,
           ),
     );
