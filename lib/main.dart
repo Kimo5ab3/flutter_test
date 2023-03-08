@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 //main() è la fuzione di entrata di tutta l'app
 void main() {
@@ -43,42 +43,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    var domande = [
+    var _domande = [
       //creazione di semplici Mappe chiave-valore per gestire domande e risposte
       //oggetti derivati dalla classe Map
       {
-        'questionText':'Qual è il tuo colore preferito?',
-        'answers':[
-          'Verde','Arancione','Blu','Rosso'
-        ],
+        'questionText': 'Qual è il tuo colore preferito?',
+        'answers': ['Verde', 'Arancione', 'Blu', 'Rosso'],
       },
       {
-        'questionText':'Qual è il tuo animale preferito?',
-        'answers':[
-          'Cane','Gatto','Gorilla','Scimmia'
-        ]
+        'questionText': 'Qual è il tuo animale preferito?',
+        'answers': ['Cane', 'Gatto', 'Gorilla', 'Scimmia']
       },
       {
-        'questionText':'Qual è il tuo sport preferito?',
-        'answers':[
-          'Trail','Calcio','Powerlifting','Gravel','Kettlebell'
-        ]
+        'questionText': 'Qual è il tuo sport preferito?',
+        'answers': ['Trail', 'Calcio', 'Powerlifting', 'Gravel', 'Kettlebell']
       }
-
-
     ];
     //build() ritorna un widget
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(title: Text('Domande')),
-      body: Column(
-        children: <Widget>[
-          Question(domande[_indiceDomanda]['questionText']),
-          ...(domande[_indiceDomanda]['answers'] as List<String>).map((domanda){
-            return Answer(_answerQuestion, domanda);
-          }).toList()
-        ],
+      home: Scaffold(
+        appBar: AppBar(title: Text('Domande')),
+        body: _indiceDomanda < _domande.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                domande: _domande,
+                questionIndex: _indiceDomanda,
+              )
+            : Result('Non ci sono più domande'),
       ),
-    )); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home
+    ); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home
   }
 }
