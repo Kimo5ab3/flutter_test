@@ -24,9 +24,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _indiceDomanda = 0;
+  int _totalScore = 0;
   // con il segno di underscore prima di una proprietà o un metodo rendiamo privato il metodo o la proprietà
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     setState(() {
+      _totalScore = _totalScore + score;
       _indiceDomanda += 1;
     });
     //print(indiceDomanda);
@@ -47,17 +49,44 @@ class _MyAppState extends State<MyApp> {
       //creazione di semplici Mappe chiave-valore per gestire domande e risposte
       //oggetti derivati dalla classe Map
       {
-        'questionText': 'Qual è il tuo colore preferito?',
-        'answers': ['Verde', 'Arancione', 'Blu', 'Rosso'],
+        'questionText': 'Qual è la capitale dell’Australia?',
+        'answers': [
+          {'txt': 'Canberra', 'score': 10},
+          {'txt': 'Sidney', 'score': 0},
+          {'txt': 'Melbourne', 'score': 0},
+          {'txt': 'Brisbaine', 'score': 0}
+        ],
       },
       {
-        'questionText': 'Qual è il tuo animale preferito?',
-        'answers': ['Cane', 'Gatto', 'Gorilla', 'Scimmia']
+        'questionText':
+            'In che anno si sono tenuti gli ultimi Mondiali di calcio in Italia?',
+        'answers': [
+          {'txt': '1956', 'score': 0},
+          {'txt': '2006', 'score': 0},
+          {'txt': '1990', 'score': 10},
+          {'txt': '1985', 'score': 0}
+        ],
       },
       {
-        'questionText': 'Qual è il tuo sport preferito?',
-        'answers': ['Trail', 'Calcio', 'Powerlifting', 'Gravel', 'Kettlebell']
-      }
+        'questionText':
+            'Come si chiama il primo lungometraggio di Steven Spielberg?',
+        'answers': [
+          {'txt': 'Lo Squalo', 'score': 0},
+          {'txt': 'Duel', 'score': 10},
+          {'txt': 'Salvate il sodato Rayan', 'score': 0},
+          {'txt': 'The Post', 'score': 0}
+        ],
+      },
+      {
+        'questionText':
+            'Quale software house ha inventato Sonic, il porcospino blu?',
+        'answers': [
+          {'txt': 'Sega', 'score': 10},
+          {'txt': 'Blizzard', 'score': 0},
+          {'txt': 'Respawn', 'score': 0},
+          {'txt': 'Sony', 'score': 0}
+        ],
+      },
     ];
     //build() ritorna un widget
     return MaterialApp(
@@ -66,10 +95,10 @@ class _MyAppState extends State<MyApp> {
         body: _indiceDomanda < _domande.length
             ? Quiz(
                 answerQuestion: _answerQuestion,
-                domande: _domande,
                 questionIndex: _indiceDomanda,
+                domande: _domande,
               )
-            : Result('Non ci sono più domande'),
+            : Result(_totalScore),
       ),
     ); //MaterialApp è un widget di Flutter che accetta parametri denominati es-> home
   }
